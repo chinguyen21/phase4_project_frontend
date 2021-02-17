@@ -13,20 +13,20 @@
   }
 }
 
-.App-header {
+.App-page {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
+  padding-top: 100px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #9feded;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
-}
+
 
 @keyframes App-logo-spin {
   from {
@@ -36,3 +36,4 @@
     transform: rotate(360deg);
   }
 }
+
