@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
-import {Typography, Button, AppBar, Toolbar, Tab } from '@material-ui/core';
+import {Typography, Button, AppBar, Toolbar, Avatar } from '@material-ui/core';
 import styling from './styling/Styling'
 import './App.css';
 
@@ -12,14 +12,25 @@ import Unauthorization from './authentication/Unauthorization';
 
 const App = () => {
   const [user, setUser] = useState({})
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(localStorage.token ? true : false)
 
   const handleLogout = () => {
     localStorage.clear();
     setUser({});
     setLoggedIn(false);
-    <Redirect to="/" />
+    <Redirect to="/"/>
   }
+
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/find", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({token: localStorage.token})
+    })
+    .then(res => res.json())
+    .then(setUser)
+  },[])
 
   return (
     <div className={styling().root}>
@@ -28,18 +39,19 @@ const App = () => {
         <AppBar position="static">
           <Toolbar style={{background: "#9feded"}}>
             <Typography variant="h6" className={styling().title} >
-              <Button><Link to= "/" style={{ textDecoration: 'none', color: 'red'}}>Home</Link></Button>
+              <Button><Link to= "/" style={{ textDecoration: 'none', color: '#3b8050'}}>Home</Link></Button>
             </Typography>
-            <Button><Link to= "/login" style={{ textDecoration: 'none', color: 'red'}}>Log In</Link></Button>
-            <Button><Link to= "/signup" style={{ textDecoration: 'none', color: 'red'}}>Sign Up</Link></Button>
-            <Button onClick={handleLogout} style={{ color: 'red' }}>Log Out</Button>
+            <Button><Link to= "/login" style={{ textDecoration: 'none', color: '#3b8050'}}>Log In</Link></Button>
+            <Button><Link to= "/signup" style={{ textDecoration: 'none', color: '#3b8050'}}>Sign Up</Link></Button>
+            <Button onClick={handleLogout} style={{ color: '#3b8050' }}>Log Out</Button>
+            <Avatar>{user.name!==undefined ? user.name.slice(0,1) : null}</Avatar>
           </Toolbar>
 
         </AppBar>
 
         <Switch>
           <Route exact path='/'>
-            {loggedIn ? <Authorization /> : <Unauthorization/>}
+            {loggedIn ? <Authorization user={user} setUser={setUser}/> : <Unauthorization/>}
           </Route>
           <Route exact path='/login'>
             {loggedIn ? <Redirect to="/" /> : <Login setUser={setUser} setLoggedIn={setLoggedIn}/>}

@@ -21,7 +21,7 @@ const Login = ({setUser, setLoggedIn}) => {
     .then(res => res.json())
     .then(response => {
       if (response.user) {
-        setUser(response.user)
+        setUser(JSON.parse(response.user))
         setLoggedIn(true)
         localStorage.token = response.token
       } else {
@@ -41,6 +41,8 @@ const Login = ({setUser, setLoggedIn}) => {
           label="Email"
           variant="filled"
           color="secondary"
+          type="email"
+          placeholder="email@email.com"
           // onChange={e => setEmail(e.target.value)}
         />
         <br/>
@@ -49,6 +51,8 @@ const Login = ({setUser, setLoggedIn}) => {
           label="Password"
           variant="filled"
           color="secondary"
+          type="password"
+          placeholder="12345678"
           // onChange={e => setPassword(e.target.value)}
         />
         <br/>

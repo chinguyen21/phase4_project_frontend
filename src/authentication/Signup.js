@@ -26,7 +26,7 @@ const Signup = ({setUser, setLoggedIn}) => {
     .then(res => res.json())
     .then(response => {
       if (response.user) {
-        setUser(response.user)
+        setUser(JSON.parse(response.user))
         setLoggedIn(true)
         localStorage.token = response.token
       } else {
@@ -47,6 +47,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Email"
           variant="filled"
           color="secondary"
+          type="email"
+          placeholder="email@email.com"
         />
         <br/>
         <TextField
@@ -54,6 +56,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Password"
           variant="filled"
           color="secondary"
+          type="password"
+          placeholder="12345678"
           />
         <br/>
         <TextField
@@ -61,6 +65,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Password Confirmation"
           variant="filled"
           color="secondary"
+          type="password"
+          placeholder="12345678"
           />
           <br/>
         <TextField
@@ -68,6 +74,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Name"
           variant="filled"
           color="secondary"
+          type="text"
+          placeholder="Dwayne Johnson"
           />
           <br/>
         <TextField
@@ -75,6 +83,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Age"
           variant="filled"
           color="secondary"
+           type="number"
+          placeholder="20"
           />
           <br/>
         <TextField
@@ -82,6 +92,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Gender"
           variant="filled"
           color="secondary"
+          type="text"
+          placeholder="Female or Male"
           />
           <br/>
         <TextField
@@ -89,6 +101,8 @@ const Signup = ({setUser, setLoggedIn}) => {
           label="Target Calories"
           variant="filled"
           color="secondary"
+          type="number"
+          placeholder="2000"
         />
           <div className='submit'>
           <Button type='submit' variant="outlined" color="default">
