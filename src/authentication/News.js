@@ -4,7 +4,7 @@ import {CardHeader, Card, CardMedia, Typography, Avatar, CardContent} from "@mat
 import Styling from '../styling/Styling'
 
 const News = ({news}) => {
-
+  console.log(news)
   return (
     <React.Fragment>
         <div className="sub-container">
@@ -16,7 +16,7 @@ const News = ({news}) => {
             </Avatar>
           }
           title= {news.title}
-          subheader={news.publishedAt.split("T")[0]}
+          subheader={news.publishAt.split("T")[0]}
         />
         <CardMedia
           className={Styling().media}

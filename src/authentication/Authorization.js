@@ -4,7 +4,7 @@ import 'react-calendar/dist/Calendar.css'
 
 import Styling from '../styling/Styling'
 import SearchIcon from '@material-ui/icons/Search';
-import {InputBase, Toolbar, Button, Container, Typography} from "@material-ui/core"
+import {InputBase, Toolbar, Button} from "@material-ui/core"
 
 import FoodsDisplay from '../components/Meals/FoodsDisplay'
 import Breakfast from '../components/Meals/Breakfast'
@@ -36,6 +36,7 @@ const Authorization = ({user, setUser}) => {
   }
 
   const handleAdd = (e) => {
+    // debugger
     e.preventDefault()
     const newUserFood = {
       user_id: user.id,
@@ -66,11 +67,12 @@ const Authorization = ({user, setUser}) => {
   }
 
   const filterLog =(meal) => {
-    if (user.user_foods) {
+    if (user && user.user_foods) {
       const logs = user.user_foods.filter(log => log.date === date.toLocaleString().split(',')[0])
       return logs.filter(log => log.meal === meal)
-    } else 
-    return []
+    } else {
+      return []
+    }
   }
 
   useEffect(() => {
