@@ -7,13 +7,12 @@ import News from './News'
 const Unauthorization = () => {
   const [allNews, setAllNews] = useState([])
   useEffect(() =>{
-    fetch("https://newsapi.org/v2/everything?q=fitness&apiKey=6506d673db3c4724b89c8306b2af7787")
+    fetch("https://newsapi.org/v2/everything?q=fitness&apiKey=d9b9072e42184c958f83e7bb09f732ad")
     .then(res => res.json())
     .then(news => {
       setAllNews(news.articles)
     })
   })
-
 
 
   return (
